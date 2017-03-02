@@ -89,5 +89,5 @@ class RocFFT(object):
 
 
 # XXX hardcoded for now
-_path = '/home/amd_user/rocFFT/build/library-build/src/librocfft-hcc-d.so'
+_path = '/root/roclib/librocfft-hcc-d.so'
 rocfft = RocFFT(ctypes.CDLL(_path))

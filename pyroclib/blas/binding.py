@@ -215,5 +215,5 @@ class RocBLAS(object):
 
 
 # XXX hardcoded for now
-_path = '/home/amd_user/rocBLAS/build/library-build/src/librocblas-hcc.so'
+_path = '/root/roclib/librocblas-hcc.so'
 rocblas = RocBLAS(ctypes.CDLL(_path))
