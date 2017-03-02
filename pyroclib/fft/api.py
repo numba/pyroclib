@@ -1,6 +1,8 @@
 from __future__ import print_function, absolute_import, division
 
 import ctypes
+import math
+
 import numpy as np
 
 from numba import hsa
@@ -15,6 +17,10 @@ def _get_rocfft():
 
 def _auto_device(ary, stream):
     return devicearray.auto_device(ary, context=None, stream=stream)
+
+
+def _is_pow2(n):
+    return (2 ** math.log2(n)) == n
 
 
 def _fft_inplace_core(rocfft, dev_buffer, inverse):
@@ -32,6 +38,10 @@ def _fft_inplace_core(rocfft, dev_buffer, inverse):
         raise TypeError("rocfft doesn't support double-prec type yet")
 
     dimensions = dev_buffer.ndim
+
+    for sz in dev_buffer.shape:
+        if not _is_pow2(sz):
+            raise NotImplementedError('non power-of-2 size is not supported')
 
     c_lengths = (ctypes.c_size_t * dimensions)(*reversed(dev_buffer.shape))
     lengths = ctypes.cast(c_lengths, ctypes.POINTER(ctypes.c_size_t))

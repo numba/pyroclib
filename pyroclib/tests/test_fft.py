@@ -123,11 +123,12 @@ class TestRocFFT(unittest.TestCase):
         out = inv_out.copy_to_host() / arr.size
         np.testing.assert_allclose(arr, out)
 
-    @unittest.expectedFailure
     def test_inplace_complex64_100_roundtrip(self):
         """Power of 2 only
         """
-        self.inplace_roundtrip(100, np.complex64)
+        with self.assertRaises(NotImplementedError) as raises:
+            self.inplace_roundtrip(100, np.complex64)
+        self.assertEqual(str(raises.exception), "non power-of-2 size is not supported")
 
     @unittest.skip('notinplace is not supported yet')
     def test_outofplace_complex64_16_roundtrip(self):
