@@ -7,14 +7,14 @@ from numba import hsa
 import numba.unittest_support as unittest
 from numba.hsa.hsadrv.driver import dgpu_present
 
-from pyroc.blas import Blas
+from pyroclib.blas import Blas
 
 
 @unittest.skipUnless(dgpu_present(), 'test only on dGPU system')
 class TestRocBlasBinding(unittest.TestCase):
     @classmethod
     def setUpClass(self):
-        from pyroc.blas.binding import rocblas
+        from pyroclib.blas.binding import rocblas
 
         self.rocblas = rocblas
 

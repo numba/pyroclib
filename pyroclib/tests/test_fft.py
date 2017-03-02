@@ -8,8 +8,8 @@ from numba import hsa
 import numba.unittest_support as unittest
 from numba.hsa.hsadrv.driver import dgpu_present
 
-from pyroc.fft.api import _fft_inplace_core, _get_rocfft
-from pyroc.fft import fft_inplace, ifft_inplace
+from pyroclib.fft.api import _fft_inplace_core, _get_rocfft
+from pyroclib.fft import fft_inplace, ifft_inplace
 
 
 @unittest.skipUnless(dgpu_present(), 'test only on dGPU system')
